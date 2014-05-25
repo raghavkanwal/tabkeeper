@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testing</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id = "header_wrap" >
+<div class="container">
+  <h1 class="title"> TabKeeper</h1><br/>
+
+<div id ="main_nav">
+  <ul>
+    <li> <%=link_to "Home", root_path %></li>
+    <li> <%=link_to "About", static_about_path %> </li>
+    <li> <%=link_to "Contact", static_contact_path %> </li>
+  </ul>
+</div>
+</div>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+</div>
+<div id = "user_wrap">
+  <div class="container">
+  <% if current_user %>
+    Howdy, <%= current_user.firstname %>.
+    <%= link_to "Log out", log_out_path %>
+    <%= link_to "My Profile", user_path(:id => current_user.id) %>
+  <% else %>
+    <%= link_to "Sign up", sign_up_path %> or
+    <%= link_to "log in", log_in_path %>
+  <% end %>
+  </div>
+</div>
